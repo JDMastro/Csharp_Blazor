@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Pages
+namespace BlazorFront.Pages.Areas
 {
     #line hidden
     using System;
@@ -110,8 +110,9 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/areas")]
-    public partial class AreasView : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/areas/form")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/areas/form/{Id:int}")]
+    public partial class AreaForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -119,30 +120,44 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 51 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\AreasView.razor"
+#line 27 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Areas\AreaForm.razor"
        
-    public Respuesta<List<Areas>> oRespuesta = new Respuesta<List<Areas>>();
+    [Parameter]
+    public int Id { get; set; }
+
+    Areas area = new Areas();
     [Inject]
     public IAreas areasRepo { get; set; }
 
+    public Respuesta<Areas> oRespuesta = new Respuesta<Areas>();
 
+    private async Task Guardar()
+    {
+        if(Id != 0) {
+            var response = await areasRepo.Update("areas/", area, Id);
+            oRespuesta = response;
+            navigation.NavigateTo("/areas");
+
+        } else {
+            var response = await areasRepo.Store("areas", area);
+            oRespuesta = response;
+            navigation.NavigateTo("/areas");
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
-        await getAreas();
-
-        //return base.OnInitializedAsync();
+        if(Id != 0)
+        {
+            oRespuesta = await areasRepo.Get("areas/", Id);
+            area = oRespuesta.Data;
+        }
     }
-
-    private async Task getAreas()
-    {
-        oRespuesta = await areasRepo.GetAll("areas");
-    }
-
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigation { get; set; }
     }
 }
 #pragma warning restore 1591

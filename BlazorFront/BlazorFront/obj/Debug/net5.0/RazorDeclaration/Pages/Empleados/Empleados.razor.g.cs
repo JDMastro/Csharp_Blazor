@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Pages
+namespace BlazorFront.Pages.Empleados
 {
     #line hidden
     using System;
@@ -110,9 +110,8 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/areas/form")]
-    [Microsoft.AspNetCore.Components.RouteAttribute("/areas/form/{Id:int}")]
-    public partial class AreaForm : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleadosjefe")]
+    public partial class Empleados : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -120,38 +119,25 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\AreaForm.razor"
+#line 69 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\Empleados.razor"
        
-    [Parameter]
-    public int Id { get; set; }
-
-    Areas area = new Areas();
+    public Respuesta<List<Trabajadores>> oRespuesta = new Respuesta<List<Trabajadores>>();
     [Inject]
-    public IAreas areasRepo { get; set; }
-
-    public Respuesta<Areas> oRespuesta = new Respuesta<Areas>();
-    //public Respuesta<Areas> oRespuestaArea = new Respuesta<Areas>();
-
-    private async Task Guardar()
-    {
-        var response = await areasRepo.Store("areas", area);
-        oRespuesta = response;
-        navigation.NavigateTo("/areas");
-    }
+    public ITrabajadores trabajadoresRepo { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if(Id != 0)
-        {
-            oRespuesta = await areasRepo.Get("areas/", Id);
-            area = oRespuesta.Data;
-        }
+        await getEmpleados();
+    }
+
+    private async Task getEmpleados()
+    {
+        oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/jefes");
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigation { get; set; }
     }
 }
 #pragma warning restore 1591

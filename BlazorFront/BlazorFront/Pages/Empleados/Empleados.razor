@@ -1,0 +1,83 @@
+﻿@page "/empleadosjefe"
+
+
+<div class="p-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>AreasView</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="/empleados/form">Crear Jefe</a>
+        </div>
+    </div>
+
+    <table class="table m-2">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Nombres</td>
+                <td>Apellidos</td>
+                <td>Direccion</td>
+                <td>Teléfono</td>
+                <td>Salario</td>
+                <td>Area</td>
+                <td>Fecha de ingreso</td>
+                <td>Sexo</td>
+                <td>Empresa</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+
+        @if (oRespuesta.Exito > 0)
+        {
+            <tbody>
+                @foreach (var item in (List<Trabajadores>)oRespuesta.Data)
+                {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nombres</td>
+                    <td>@item.Apellidos</td>
+                    <td>@item.Direccion</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Salario</td>
+                    <td>@item.AreasId</td>
+                    <td>@item.FechaIngreso</td>
+                    <td>@item.Sexo</td>
+                    <td>@item.EmpresasId</td>
+                    <td>Editar | Eliminar</td>
+                    <!--<td>
+        <a href="/areas/form/@item.Id">Editar</a>
+    </td>-->
+                </tr>
+                }
+
+            </tbody>
+        }
+        else
+        {
+            <div class="spinner-border"></div>
+        }
+    </table>
+
+
+
+
+
+</div>
+
+
+@code {
+    public Respuesta<List<Trabajadores>> oRespuesta = new Respuesta<List<Trabajadores>>();
+    [Inject]
+    public ITrabajadores trabajadoresRepo { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await getEmpleados();
+    }
+
+    private async Task getEmpleados()
+    {
+        oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/jefes");
+    }
+}

@@ -32,9 +32,10 @@ namespace BlazorFront.Services.Respository
             return response.Content.ReadFromJsonAsync<Respuesta<T>>().Result;
         }
 
-        public Task<Respuesta<T>> Update(string url, T entity, int Id)
+        public async Task<Respuesta<T>> Update(string url, T entity, int Id)
         {
-            throw new NotImplementedException();
+            var response = await _http.PutAsJsonAsync<T>(pathURL + url + Id, entity);
+            return response.Content.ReadFromJsonAsync<Respuesta<T>>().Result;
         }
     }
 }

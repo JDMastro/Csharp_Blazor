@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Shared
+namespace BlazorFront.Pages.Empleados
 {
     #line hidden
     using System;
@@ -110,7 +110,9 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleados/form")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleados/form/{Id:int}")]
+    public partial class EmpleadosForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -118,20 +120,43 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 38 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Shared\NavMenu.razor"
+#line 95 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosForm.razor"
        
-    private bool collapseNavMenu = true;
+    [Parameter]
+    public int Id { get; set; }
+    [Inject]
+    public IAreas areasRepo { get; set; }
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    [Inject]
+    public IEmpresas empresasRepo { get; set; }
 
-    private void ToggleNavMenu()
+    public Respuesta<List<Areas>> ListAreasRespuesta = new Respuesta<List<Areas>>();
+    public Respuesta<List<Empresas>> ListEmpresasRespuesta = new Respuesta<List<Empresas>>();
+
+    Trabajadores trabajadores = new Trabajadores();
+    Areas areas = new Areas();
+
+    protected override async Task OnInitializedAsync()
     {
-        collapseNavMenu = !collapseNavMenu;
+        await getAreasAndEmpresas();
+
+
+        trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
+        trabajadores.Sexo = "Masculino";
+        trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+        //return base.OnInitializedAsync();
+    }
+
+    private async Task getAreasAndEmpresas()
+    {
+        ListAreasRespuesta = await areasRepo.GetAll("areas/jefes");
+        ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigation { get; set; }
     }
 }
 #pragma warning restore 1591

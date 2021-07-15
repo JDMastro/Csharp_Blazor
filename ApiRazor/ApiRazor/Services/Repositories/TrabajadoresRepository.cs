@@ -38,6 +38,13 @@ namespace ApiRazor.Services.Repositories
             return await Context.Trabajadores.FromSqlRaw("call test.SpObtenerTrabajadorJefe();").ToListAsync();
         }
 
+        public async Task<Trabajadores> GetTrabajadoresSp(int id)
+        {
+            var Vid = new MySqlParameter("@Vid", id);
+            var res = await Context.Trabajadores.FromSqlRaw("call test.SpObtenerTrabajadorId(@Vid);", parameters: new[] { Vid }).ToListAsync();
+            return res.FirstOrDefault();
+        }
+
         public async Task<Trabajadores> InsertTrabajadoresEmpleadosSp(Trabajadores t)
         {
             var Vnombres = new MySqlParameter("@Vnombres", t.Nombres);

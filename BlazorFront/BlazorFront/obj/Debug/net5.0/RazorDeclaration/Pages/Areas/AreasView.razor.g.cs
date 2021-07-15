@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Shared
+namespace BlazorFront.Pages.Areas
 {
     #line hidden
     using System;
@@ -110,7 +110,8 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/areas")]
+    public partial class AreasView : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -118,16 +119,26 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 38 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Shared\NavMenu.razor"
+#line 54 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Areas\AreasView.razor"
        
-    private bool collapseNavMenu = true;
+    public Respuesta<List<Areas>> oRespuesta = new Respuesta<List<Areas>>();
+    [Inject]
+    public IAreas areasRepo { get; set; }
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
+
+    protected override async Task OnInitializedAsync()
     {
-        collapseNavMenu = !collapseNavMenu;
+        await getAreas();
+
+        //return base.OnInitializedAsync();
     }
+
+    private async Task getAreas()
+    {
+        oRespuesta = await areasRepo.GetAll("areas");
+    }
+
 
 #line default
 #line hidden

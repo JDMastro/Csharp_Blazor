@@ -56,7 +56,11 @@ C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\ref\BlazorF
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.pdb
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.genruntimeconfig.cache
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.csproj.CopyComplete
-C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\AreasView.razor.g.cs
-C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\AreasView.razor.g.cs
-C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\AreaForm.razor.g.cs
-C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\AreaForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Areas\AreaForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Areas\AreasView.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Areas\AreaForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Areas\AreasView.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\Empleados.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\Empleados.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\EmpleadosForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosForm.razor.g.cs

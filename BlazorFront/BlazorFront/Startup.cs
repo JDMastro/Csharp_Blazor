@@ -41,6 +41,8 @@ namespace BlazorFront
             services.AddSingleton<HttpClient>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAreas, AreasRepository>();
+            services.AddScoped<IEmpresas, EmpresasRepository>();
+            services.AddScoped<ITrabajadores, TrabajadoresRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

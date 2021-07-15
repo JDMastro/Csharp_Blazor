@@ -105,5 +105,19 @@ namespace ApiRazor.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTrabajadores (int id) 
+        {
+            var respuesta = new Respuesta<Trabajadores>();
+            try {
+                respuesta.Exito = 1;
+                respuesta.Data = await trabajadoresRepository.GetTrabajadoresSp(id);
+            }catch(Exception ex) {
+                respuesta.Mensaje = ex.Message;
+            }
+
+
+            return Ok(respuesta);
+        }
     }
 }

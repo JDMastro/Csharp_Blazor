@@ -10,6 +10,7 @@ namespace ApiRazor.Services.Interfaces
     {
         Task<List<Trabajadores>> GetEmpleadosSp();
         Task<List<Trabajadores>> GetJefesSp();
+        Task<Trabajadores> GetTrabajadoresSp(int id);
         Task<Trabajadores> InsertTrabajadoresJefesSp(Trabajadores t);
         Task<Trabajadores> InsertTrabajadoresEmpleadosSp(Trabajadores t);
         Task<Trabajadores> ActualizarTrabajadoresSp(Trabajadores t);
