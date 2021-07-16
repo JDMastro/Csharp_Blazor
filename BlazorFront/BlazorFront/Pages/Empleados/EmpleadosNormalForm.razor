@@ -3,100 +3,104 @@
 @inject NavigationManager navigation
 
 <h3>EmpleadosForm</h3>
+@if (ListAreasRespuesta.Exito > 0 && ListAreasRespuesta.Data.Count > 0)
+{
+
+    <EditForm Model="@trabajadores">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+
+                    <div class="form-group">
+                        <InputText class="form-control" @bind-Value="@trabajadores.Nombres" placeholder="Nombres"></InputText>
+                    </div>
+
+                    <div class="form-group">
+                        <InputText class="form-control" @bind-Value="@trabajadores.Apellidos" placeholder="Apellido"></InputText>
+                    </div>
+
+                    <div class="form-group">
+                        <InputText class="form-control" @bind-Value="@trabajadores.Direccion" placeholder="Direccion"></InputText>
+                    </div>
+
+                    <div class="form-group">
+                        <InputText class="form-control" @bind-Value="@trabajadores.Telefono" placeholder="Telefono"></InputText>
+                    </div>
+
+                    <div class="form-group">
+                        <InputNumber class="form-control" @bind-Value="@trabajadores.Salario" placeholder="Telefono"></InputNumber>
+                    </div>
 
 
-<EditForm Model="@trabajadores">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
 
-                <div class="form-group">
-                    <InputText class="form-control" @bind-Value="@trabajadores.Nombres" placeholder="Nombres"></InputText>
                 </div>
 
-                <div class="form-group">
-                    <InputText class="form-control" @bind-Value="@trabajadores.Apellidos" placeholder="Apellido"></InputText>
-                </div>
-
-                <div class="form-group">
-                    <InputText class="form-control" @bind-Value="@trabajadores.Direccion" placeholder="Direccion"></InputText>
-                </div>
-
-                <div class="form-group">
-                    <InputText class="form-control" @bind-Value="@trabajadores.Telefono" placeholder="Telefono"></InputText>
-                </div>
-
-                <div class="form-group">
-                    <InputNumber class="form-control" @bind-Value="@trabajadores.Salario" placeholder="Telefono"></InputNumber>
-                </div>
+                <div class="col-sm-12 col-md-6" hidden="@IsShow">
 
 
+                    <div class="form-group">
 
-            </div>
+                        @if (ListAreasRespuesta.Exito > 0)
+                        {
+                            <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.AreasId" placeholder="Area">
+                                @foreach (var item in (List<Areas>)ListAreasRespuesta.Data)
+                                        {
+                                    <option value="@item.Id">@item.Descripcion</option>
+                                        }
+                            </InputSelect>
+                        }
 
-            <div class="col-sm-12 col-md-6" hidden="@IsShow">
+                    </div>
 
 
-                <div class="form-group">
+                    <div class="form-group">
+                        <InputDate class="form-control" @bind-Value="@trabajadores.FechaIngreso"></InputDate>
+                    </div>
 
-                    @if (ListAreasRespuesta.Exito > 0)
-                    {
-                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.AreasId" placeholder="Area">
-                            @foreach (var item in (List<Areas>)ListAreasRespuesta.Data)
-                                {
-                                <option value="@item.Id">@item.Descripcion</option>
-                                }
+                    <div class="form-group">
+                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.Sexo" placeholder="Area">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
                         </InputSelect>
-                    }
+                    </div>
+
+                    <div class="form-group">
+
+                        @if (ListAreasRespuesta.Exito > 0)
+                        {
+                            <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.EmpresasId" placeholder="Area">
+                                @foreach (var item in (List<Empresas>)ListEmpresasRespuesta.Data)
+                                        {
+                                    <option value="@item.Id">@item.Descripcion</option>
+                                        }
+                            </InputSelect>
+                        }
+
+                    </div>
+
+
+
+
+
+
+
+
+
 
                 </div>
-
 
                 <div class="form-group">
-                    <InputDate class="form-control" @bind-Value="@trabajadores.FechaIngreso"></InputDate>
+                    <button @onclick="Guardar">Guardar</button>
                 </div>
-
-                <div class="form-group">
-                    <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.Sexo" placeholder="Area">
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </InputSelect>
-                </div>
-
-                <div class="form-group">
-
-                    @if (ListAreasRespuesta.Exito > 0)
-                    {
-                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.EmpresasId" placeholder="Area">
-                            @foreach (var item in (List<Empresas>)ListEmpresasRespuesta.Data)
-                                {
-                                <option value="@item.Id">@item.Descripcion</option>
-                                }
-                        </InputSelect>
-                    }
-
-                </div>
-
-
-
-
-
-
-
-
-
-
             </div>
 
-            <div class="form-group">
-                <button @onclick="Guardar">Guardar</button>
-            </div>
         </div>
-
-    </div>
-</EditForm>
+    </EditForm>
 
 
+}
+else
+{<p>Debe Crear Más Jefes</p> <a href="/empleados/form">Jefes</a>}
 
 @code {
     [Parameter]
@@ -123,15 +127,19 @@
     {
         await getAreasAndEmpresas();
 
-        if(Id != 0) {
+        if (Id != 0)
+        {
             oRespuesta = await trabajadoresRepo.Get("trabajadores/", Id);
             trabajadores = oRespuesta.Data;
         }
-        else {
-
-            trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
-            trabajadores.Sexo = "Masculino";
-            trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+        else
+        {
+            if (ListAreasRespuesta.Data.Count > 0)
+            {
+                trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
+                trabajadores.Sexo = "Masculino";
+                trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+            }
         }
 
         //return base.OnInitializedAsync();
@@ -141,14 +149,14 @@
     {
         ListAreasRespuesta = await areasRepo.GetAll("areas/empleados");
         ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
-        if(Id != 0)
+        if (Id != 0)
         {
             IsShow = true;
         }
     }
     private async Task Guardar()
     {
-        if(Id != 0)
+        if (Id != 0)
         {
             var response = await trabajadoresRepo.Update("Trabajadores/", trabajadores, Id);
             oRespuesta = response;

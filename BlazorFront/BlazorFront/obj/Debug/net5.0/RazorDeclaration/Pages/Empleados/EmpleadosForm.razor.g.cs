@@ -120,7 +120,7 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 101 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosForm.razor"
+#line 108 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosForm.razor"
        
     [Parameter]
     public int Id { get; set; }
@@ -146,15 +146,21 @@ using BlazorFront.Services.Interfaces;
     {
         await getAreasAndEmpresas();
 
-        if(Id != 0) {
+        if (Id != 0)
+        {
             oRespuesta = await trabajadoresRepo.Get("trabajadores/", Id);
             trabajadores = oRespuesta.Data;
-        }
-        else {
 
-            trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
-            trabajadores.Sexo = "Masculino";
-            trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+           
+        }
+        else
+        {
+            if(ListAreasRespuesta.Data.Count > 0) {
+                trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
+                trabajadores.Sexo = "Masculino";
+                trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+            }
+
         }
 
         //return base.OnInitializedAsync();
@@ -164,14 +170,14 @@ using BlazorFront.Services.Interfaces;
     {
         ListAreasRespuesta = await areasRepo.GetAll("areas/jefes");
         ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
-        if(Id != 0)
+        if (Id != 0)
         {
             IsShow = true;
         }
     }
     private async Task Guardar()
     {
-        if(Id != 0)
+        if (Id != 0)
         {
             var response = await trabajadoresRepo.Update("Trabajadores/", trabajadores, Id);
             oRespuesta = response;
