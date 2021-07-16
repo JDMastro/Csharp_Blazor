@@ -119,7 +119,7 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 69 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\Empleados.razor"
+#line 68 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\Empleados.razor"
        
     public Respuesta<List<Trabajadores>> oRespuesta = new Respuesta<List<Trabajadores>>();
     [Inject]

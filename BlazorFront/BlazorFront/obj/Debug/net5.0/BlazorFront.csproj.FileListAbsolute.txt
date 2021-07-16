@@ -64,3 +64,7 @@ C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclar
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\Empleados.razor.g.cs
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\EmpleadosForm.razor.g.cs
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\EmpleadosNormal.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\EmpleadosNormalForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosNormal.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosNormalForm.razor.g.cs

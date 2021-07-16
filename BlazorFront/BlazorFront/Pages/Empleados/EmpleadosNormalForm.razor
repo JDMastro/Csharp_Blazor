@@ -1,5 +1,5 @@
-﻿@page "/empleados/form"
-@page "/empleados/form/{Id:int}"
+﻿@page "/empleados/normal/form"
+@page "/empleados/normal/form/{Id:int}"
 @inject NavigationManager navigation
 
 <h3>EmpleadosForm</h3>
@@ -139,7 +139,7 @@
 
     private async Task getAreasAndEmpresas()
     {
-        ListAreasRespuesta = await areasRepo.GetAll("areas/jefes");
+        ListAreasRespuesta = await areasRepo.GetAll("areas/empleados");
         ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
         if(Id != 0)
         {
@@ -152,13 +152,13 @@
         {
             var response = await trabajadoresRepo.Update("Trabajadores/", trabajadores, Id);
             oRespuesta = response;
-            navigation.NavigateTo("/empleadosjefe");
+            navigation.NavigateTo("/empleadosnormal");
         }
         else
         {
-            var response = await trabajadoresRepo.Store("trabajadores/jefes", trabajadores);
+            var response = await trabajadoresRepo.Store("trabajadores/empleados", trabajadores);
             oRespuesta = response;
-            navigation.NavigateTo("/empleadosjefe");
+            navigation.NavigateTo("/empleadosnormal");
         }
     }
 }

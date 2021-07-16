@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Shared
+namespace BlazorFront.Pages.Empleados
 {
     #line hidden
     using System;
@@ -110,7 +110,8 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleadosnormal")]
+    public partial class EmpleadosNormal : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -118,15 +119,20 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Shared\NavMenu.razor"
+#line 68 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosNormal.razor"
        
-    private bool collapseNavMenu = true;
+    public Respuesta<List<Trabajadores>> oRespuesta = new Respuesta<List<Trabajadores>>();
+    [Inject]
+    public ITrabajadores trabajadoresRepo { get; set; }
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+    protected override async Task OnInitializedAsync()
     {
-        collapseNavMenu = !collapseNavMenu;
+        await getEmpleados();
+    }
+
+    private async Task getEmpleados()
+    {
+        oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/empleados");
     }
 
 #line default

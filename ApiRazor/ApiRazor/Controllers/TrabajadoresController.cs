@@ -72,7 +72,7 @@ namespace ApiRazor.Controllers
             var respuesta = new Respuesta<Trabajadores>();
             try
             {
-                await trabajadoresRepository.InsertTrabajadoresEmpleadosSp(t);
+                await trabajadoresRepository.InsertTrabajadoresJefesSp(t);
                 respuesta.Exito = 1;
             }
             catch (Exception ex)

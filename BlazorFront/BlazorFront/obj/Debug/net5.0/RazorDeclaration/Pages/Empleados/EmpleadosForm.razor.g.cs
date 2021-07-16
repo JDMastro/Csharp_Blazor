@@ -120,7 +120,7 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 95 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosForm.razor"
+#line 101 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosForm.razor"
        
     [Parameter]
     public int Id { get; set; }
@@ -130,20 +130,33 @@ using BlazorFront.Services.Interfaces;
     [Inject]
     public IEmpresas empresasRepo { get; set; }
 
+    [Inject]
+    public ITrabajadores trabajadoresRepo { get; set; }
+
     public Respuesta<List<Areas>> ListAreasRespuesta = new Respuesta<List<Areas>>();
     public Respuesta<List<Empresas>> ListEmpresasRespuesta = new Respuesta<List<Empresas>>();
+    public Respuesta<Trabajadores> oRespuesta = new Respuesta<Trabajadores>();
 
     Trabajadores trabajadores = new Trabajadores();
     Areas areas = new Areas();
+
+    private bool IsShow { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
         await getAreasAndEmpresas();
 
+        if(Id != 0) {
+            oRespuesta = await trabajadoresRepo.Get("trabajadores/", Id);
+            trabajadores = oRespuesta.Data;
+        }
+        else {
 
-        trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
-        trabajadores.Sexo = "Masculino";
-        trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+            trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
+            trabajadores.Sexo = "Masculino";
+            trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+        }
+
         //return base.OnInitializedAsync();
     }
 
@@ -151,6 +164,25 @@ using BlazorFront.Services.Interfaces;
     {
         ListAreasRespuesta = await areasRepo.GetAll("areas/jefes");
         ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
+        if(Id != 0)
+        {
+            IsShow = true;
+        }
+    }
+    private async Task Guardar()
+    {
+        if(Id != 0)
+        {
+            var response = await trabajadoresRepo.Update("Trabajadores/", trabajadores, Id);
+            oRespuesta = response;
+            navigation.NavigateTo("/empleadosjefe");
+        }
+        else
+        {
+            var response = await trabajadoresRepo.Store("trabajadores/jefes", trabajadores);
+            oRespuesta = response;
+            navigation.NavigateTo("/empleadosjefe");
+        }
     }
 
 #line default

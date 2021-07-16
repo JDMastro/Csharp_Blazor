@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace BlazorFront.Shared
+namespace BlazorFront.Pages.Empleados
 {
     #line hidden
     using System;
@@ -110,7 +110,9 @@ using BlazorFront.Services.Interfaces;
 #line default
 #line hidden
 #nullable disable
-    public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleados/normal/form")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/empleados/normal/form/{Id:int}")]
+    public partial class EmpleadosNormalForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -118,20 +120,75 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Shared\NavMenu.razor"
+#line 101 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosNormalForm.razor"
        
-    private bool collapseNavMenu = true;
+    [Parameter]
+    public int Id { get; set; }
+    [Inject]
+    public IAreas areasRepo { get; set; }
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    [Inject]
+    public IEmpresas empresasRepo { get; set; }
 
-    private void ToggleNavMenu()
+    [Inject]
+    public ITrabajadores trabajadoresRepo { get; set; }
+
+    public Respuesta<List<Areas>> ListAreasRespuesta = new Respuesta<List<Areas>>();
+    public Respuesta<List<Empresas>> ListEmpresasRespuesta = new Respuesta<List<Empresas>>();
+    public Respuesta<Trabajadores> oRespuesta = new Respuesta<Trabajadores>();
+
+    Trabajadores trabajadores = new Trabajadores();
+    Areas areas = new Areas();
+
+    private bool IsShow { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
     {
-        collapseNavMenu = !collapseNavMenu;
+        await getAreasAndEmpresas();
+
+        if(Id != 0) {
+            oRespuesta = await trabajadoresRepo.Get("trabajadores/", Id);
+            trabajadores = oRespuesta.Data;
+        }
+        else {
+
+            trabajadores.AreasId = ListAreasRespuesta.Data.FirstOrDefault().Id;
+            trabajadores.Sexo = "Masculino";
+            trabajadores.EmpresasId = ListEmpresasRespuesta.Data.FirstOrDefault().Id;
+        }
+
+        //return base.OnInitializedAsync();
+    }
+
+    private async Task getAreasAndEmpresas()
+    {
+        ListAreasRespuesta = await areasRepo.GetAll("areas/empleados");
+        ListEmpresasRespuesta = await empresasRepo.GetAll("empresas");
+        if(Id != 0)
+        {
+            IsShow = true;
+        }
+    }
+    private async Task Guardar()
+    {
+        if(Id != 0)
+        {
+            var response = await trabajadoresRepo.Update("Trabajadores/", trabajadores, Id);
+            oRespuesta = response;
+            navigation.NavigateTo("/empleadosnormal");
+        }
+        else
+        {
+            var response = await trabajadoresRepo.Store("trabajadores/empleados", trabajadores);
+            oRespuesta = response;
+            navigation.NavigateTo("/empleadosnormal");
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigation { get; set; }
     }
 }
 #pragma warning restore 1591

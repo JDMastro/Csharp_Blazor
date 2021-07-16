@@ -1,13 +1,13 @@
-﻿@page "/empleadosjefe"
+﻿@page "/empleadosnormal"
 
 
 <div class="p-3">
     <div class="row">
         <div class="col-md-6">
-            <h3>AreasView</h3>
+            <h3>dasdasdasdasd</h3>
         </div>
         <div class="col-md-6 text-right">
-            <a href="/empleados/form">Crear Jefe</a>
+            <a href="/empleados/normal/form">Crear Empleado</a>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
                     <td>@item.Sexo</td>
                     <td>@item.EmpresasId</td>
                     <td>
-        <a href="/empleados/form/@item.Id">Editar</a>
+        <a href="/empleados/normal/form/@item.Id">Editar</a>
     </td>
                 </tr>
                 }
@@ -77,6 +77,6 @@
 
     private async Task getEmpleados()
     {
-        oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/jefes");
+        oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/empleados");
     }
 }
