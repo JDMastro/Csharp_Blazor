@@ -119,5 +119,40 @@ namespace ApiRazor.Controllers
 
             return Ok(respuesta);
         }
+
+
+        [HttpDelete("/api/[controller]/jefes/{id}")]
+        public async Task<ActionResult> Removedjefesn(int id)
+        {
+            var respuesta = new Respuesta<Trabajadores>();
+            try
+            {
+                await trabajadoresRepository.EliminarJefesSp(id);
+                respuesta.Exito = 1;
+            }
+            catch (Exception ex)
+            {
+                respuesta.Mensaje = ex.Message;
+            }
+            return Ok(respuesta);
+        }
+
+        [HttpDelete("/api/[controller]/empleados/{id}")]
+        public async Task<ActionResult> Removedempleados(int id)
+        {
+            var respuesta = new Respuesta<Trabajadores>();
+            try
+            {
+                await trabajadoresRepository.EliminarJefesSp(id);
+                respuesta.Exito = 1;
+            }
+            catch (Exception ex)
+            {
+                respuesta.Mensaje = ex.Message;
+            }
+            return Ok(respuesta);
+        }
+
+
     }
 }

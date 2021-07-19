@@ -28,6 +28,20 @@ namespace ApiRazor.Services.Repositories
             return res.FirstOrDefault();
         }
 
+        public async Task<Trabajadores> EliminarJefesSp(int id)
+        {
+            var Vid = new MySqlParameter("@Vid", id);
+            var res = await Context.Trabajadores.FromSqlRaw("call test.SpEliminarTrabajadorJefe(@Vid);", parameters: new[] { Vid }).ToListAsync();
+            return res.FirstOrDefault();
+        }
+
+        public async Task<Trabajadores> EliminarTrabajadoresSp(int id)
+        {
+            var Vid = new MySqlParameter("@Vid", id);
+            var res = await Context.Trabajadores.FromSqlRaw("call test.SpEliminarTrabajadorNormal(@Vid);", parameters: new[] { Vid }).ToListAsync();
+            return res.FirstOrDefault();
+        }
+
         public async Task<List<Trabajadores>> GetEmpleadosSp()
         {
             return await Context.Trabajadores.FromSqlRaw("call test.SpObtenerTrabajadorEmpleados();").ToListAsync();

@@ -14,5 +14,7 @@ namespace ApiRazor.Services.Interfaces
         Task<Trabajadores> InsertTrabajadoresJefesSp(Trabajadores t);
         Task<Trabajadores> InsertTrabajadoresEmpleadosSp(Trabajadores t);
         Task<Trabajadores> ActualizarTrabajadoresSp(Trabajadores t);
+        Task<Trabajadores> EliminarTrabajadoresSp(int id);
+        Task<Trabajadores> EliminarJefesSp(int id);
     }
 }
