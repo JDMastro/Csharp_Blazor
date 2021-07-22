@@ -16,6 +16,12 @@ namespace BlazorFront.Services.Respository
       
         public Repository(HttpClient http) => _http = http;
 
+        public async Task<Respuesta<T>> Delete(string url, int Id)
+        {
+            var response = await _http.DeleteAsync(pathURL + url + Id);
+            return response.Content.ReadFromJsonAsync<Respuesta<T>>().Result;
+        }
+
         public async Task<Respuesta<T>> Get(string url, int Id)
         {
             return await _http.GetFromJsonAsync<Respuesta<T>>(pathURL+url+Id);

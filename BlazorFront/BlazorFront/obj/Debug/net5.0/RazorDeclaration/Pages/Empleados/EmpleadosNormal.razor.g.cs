@@ -119,11 +119,19 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 68 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosNormal.razor"
+#line 70 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosNormal.razor"
        
     public Respuesta<List<Trabajadores>> oRespuesta = new Respuesta<List<Trabajadores>>();
     [Inject]
     public ITrabajadores trabajadoresRepo { get; set; }
+
+    
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 76 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Empleados\EmpleadosNormal.razor"
 
     protected override async Task OnInitializedAsync()
     {
@@ -135,9 +143,23 @@ using BlazorFront.Services.Interfaces;
         oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/empleados");
     }
 
+    private async Task DeleteEmpleado(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+        if (confirmed)
+        {
+            // Delete!
+            await trabajadoresRepo.Delete("Trabajadores/empleados/", id);
+            await getEmpleados();
+            navigation.NavigateTo("/empleadosnormal");
+        }
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime JsRuntime { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigation { get; set; }
     }
 }
 #pragma warning restore 1591

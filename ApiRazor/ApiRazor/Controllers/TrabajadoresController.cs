@@ -120,7 +120,6 @@ namespace ApiRazor.Controllers
             return Ok(respuesta);
         }
 
-
         [HttpDelete("/api/[controller]/jefes/{id}")]
         public async Task<ActionResult> Removedjefesn(int id)
         {
@@ -143,7 +142,7 @@ namespace ApiRazor.Controllers
             var respuesta = new Respuesta<Trabajadores>();
             try
             {
-                await trabajadoresRepository.EliminarJefesSp(id);
+                await trabajadoresRepository.EliminarTrabajadoresSp(id);
                 respuesta.Exito = 1;
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿@page "/empleadosnormal"
 
+@inject NavigationManager navigation
 
 <div class="p-3">
     <div class="row">
@@ -33,21 +34,22 @@
             <tbody>
                 @foreach (var item in (List<Trabajadores>)oRespuesta.Data)
                 {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Nombres</td>
-                    <td>@item.Apellidos</td>
-                    <td>@item.Direccion</td>
-                    <td>@item.Telefono</td>
-                    <td>@item.Salario</td>
-                    <td>@item.AreasId</td>
-                    <td>@item.FechaIngreso</td>
-                    <td>@item.Sexo</td>
-                    <td>@item.EmpresasId</td>
-                    <td>
-        <a href="/empleados/normal/form/@item.Id">Editar</a>
-    </td>
-                </tr>
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombres</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.Direccion</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Salario</td>
+                        <td>@item.AreasId</td>
+                        <td>@item.FechaIngreso</td>
+                        <td>@item.Sexo</td>
+                        <td>@item.EmpresasId</td>
+                        <td>
+                            <a href="/empleados/normal/form/@item.Id">Editar</a>
+                            <a @onclick="()=> DeleteEmpleado(item.Id)"><span class="oi oi-delete"></span></a>
+                        </td>
+                    </tr>
                 }
 
             </tbody>
@@ -70,6 +72,8 @@
     [Inject]
     public ITrabajadores trabajadoresRepo { get; set; }
 
+    @inject IJSRuntime JsRuntime
+
     protected override async Task OnInitializedAsync()
     {
         await getEmpleados();
@@ -78,5 +82,17 @@
     private async Task getEmpleados()
     {
         oRespuesta = await trabajadoresRepo.GetAll("Trabajadores/empleados");
+    }
+
+    private async Task DeleteEmpleado(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+        if (confirmed)
+        {
+            // Delete!
+            await trabajadoresRepo.Delete("Trabajadores/empleados/", id);
+            await getEmpleados();
+            navigation.NavigateTo("/empleadosnormal");
+        }
     }
 }

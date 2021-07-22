@@ -12,6 +12,7 @@ namespace BlazorFront.Services.Interfaces
         Task<Respuesta<List<T>>> GetAll(string url);
         Task<Respuesta<T>> Get(string url, int Id);
         Task<Respuesta<T>> Store(string url, T entity);
+        Task<Respuesta<T>> Delete(string url, int Id);
         Task<Respuesta<T>> Update(string url, T entity, int Id);
     }
 }

@@ -10,7 +10,6 @@ C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\bin\Debug\net5.0\ref\BlazorF
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\bin\Debug\net5.0\BlazorFront.pdb
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\bin\Debug\net5.0\BlazorFront.Views.dll
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\bin\Debug\net5.0\BlazorFront.Views.pdb
-C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.csproj.AssemblyReference.cache
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.AssemblyInfoInputs.cache
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.AssemblyInfo.cs
@@ -68,3 +67,4 @@ C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclar
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\RazorDeclaration\Pages\Empleados\EmpleadosNormalForm.razor.g.cs
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosNormal.razor.g.cs
 C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\Razor\Pages\Empleados\EmpleadosNormalForm.razor.g.cs
+C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\obj\Debug\net5.0\BlazorFront.csproj.AssemblyReference.cache
