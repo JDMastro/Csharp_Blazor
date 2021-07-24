@@ -120,7 +120,7 @@ using BlazorFront.Services.Interfaces;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 27 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Areas\AreaForm.razor"
+#line 29 "C:\Users\jdmlm\source\repos\BlazorFront\BlazorFront\Pages\Areas\AreaForm.razor"
        
     [Parameter]
     public int Id { get; set; }
@@ -133,16 +133,16 @@ using BlazorFront.Services.Interfaces;
 
     private async Task Guardar()
     {
-        if(Id != 0) {
-            var response = await areasRepo.Update("areas/", area, Id);
-            oRespuesta = response;
-            navigation.NavigateTo("/areas");
+            if(Id != 0) {
+                var response = await areasRepo.Update("areas/", area, Id);
+                oRespuesta = response;
+                navigation.NavigateTo("/areas");
 
-        } else {
-            var response = await areasRepo.Store("areas", area);
-            oRespuesta = response;
-            navigation.NavigateTo("/areas");
-        }
+            } else {
+                var response = await areasRepo.Store("areas", area);
+                oRespuesta = response;
+                navigation.NavigateTo("/areas");
+            }
     }
 
     protected override async Task OnInitializedAsync()

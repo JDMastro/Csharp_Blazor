@@ -6,96 +6,106 @@
 @if (ListAreasRespuesta.Exito > 0 && ListAreasRespuesta.Data.Count > 0)
 {
 
-    <EditForm Model="@trabajadores">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
+<EditForm Model="@trabajadores" OnValidSubmit="@Guardar">
+    <DataAnnotationsValidator />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
 
-                    <div class="form-group">
-                        <InputText class="form-control" @bind-Value="@trabajadores.Nombres" placeholder="Nombres"></InputText>
-                    </div>
-
-                    <div class="form-group">
-                        <InputText class="form-control" @bind-Value="@trabajadores.Apellidos" placeholder="Apellido"></InputText>
-                    </div>
-
-                    <div class="form-group">
-                        <InputText class="form-control" @bind-Value="@trabajadores.Direccion" placeholder="Direccion"></InputText>
-                    </div>
-
-                    <div class="form-group">
-                        <InputText class="form-control" @bind-Value="@trabajadores.Telefono" placeholder="Telefono"></InputText>
-                    </div>
-
-                    <div class="form-group">
-                        <InputNumber class="form-control" @bind-Value="@trabajadores.Salario" placeholder="Telefono"></InputNumber>
-                    </div>
-
-
-
-                </div>
-
-                <div class="col-sm-12 col-md-6" hidden="@IsShow">
-
-
-                    <div class="form-group">
-
-                        @if (ListAreasRespuesta.Exito > 0)
-                        {
-                            <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.AreasId" placeholder="Area">
-                                @foreach (var item in (List<Areas>)ListAreasRespuesta.Data)
-                                        {
-                                    <option value="@item.Id">@item.Descripcion</option>
-                                        }
-                            </InputSelect>
-                        }
-
-                    </div>
-
-
-                    <div class="form-group">
-                        <InputDate class="form-control" @bind-Value="@trabajadores.FechaIngreso"></InputDate>
-                    </div>
-
-                    <div class="form-group">
-                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.Sexo" placeholder="Area">
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                        </InputSelect>
-                    </div>
-
-                    <div class="form-group">
-
-                        @if (ListAreasRespuesta.Exito > 0)
-                        {
-                            <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.EmpresasId" placeholder="Area">
-                                @foreach (var item in (List<Empresas>)ListEmpresasRespuesta.Data)
-                                        {
-                                    <option value="@item.Id">@item.Descripcion</option>
-                                        }
-                            </InputSelect>
-                        }
-
-                    </div>
-
-
-
-
-
-
-
-
-
-
+                <div class="form-group">
+                    <InputText class="form-control" @bind-Value="@trabajadores.Nombres" placeholder="Nombres"></InputText>
+                    <ValidationMessage For="@(()=> trabajadores.Nombres )" />
                 </div>
 
                 <div class="form-group">
-                    <button @onclick="Guardar">Guardar</button>
+                    <InputText class="form-control" @bind-Value="@trabajadores.Apellidos" placeholder="Apellido"></InputText>
+                    <ValidationMessage For="@(()=> trabajadores.Apellidos )" />
                 </div>
+
+                <div class="form-group">
+                    <InputText class="form-control" @bind-Value="@trabajadores.Direccion" placeholder="Direccion"></InputText>
+                    <ValidationMessage For="@(()=> trabajadores.Direccion )" />
+                </div>
+
+                <div class="form-group">
+                    <InputText class="form-control" @bind-Value="@trabajadores.Telefono" placeholder="Telefono"></InputText>
+                    <ValidationMessage For="@(()=> trabajadores.Telefono )" />
+                </div>
+
+                <div class="form-group">
+                    <InputNumber class="form-control" @bind-Value="@trabajadores.Salario" placeholder="Telefono"></InputNumber>
+                    <ValidationMessage For="@(()=> trabajadores.Salario )" />
+                </div>
+
+
+
             </div>
 
+            <div class="col-sm-12 col-md-6" hidden="@IsShow">
+
+
+                <div class="form-group">
+
+                    @if (ListAreasRespuesta.Exito > 0)
+                    {
+                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.AreasId" placeholder="Area">
+                            @foreach (var item in (List<Areas>)ListAreasRespuesta.Data)
+                                    {
+                                <option value="@item.Id">@item.Descripcion</option>
+                                    }
+                        </InputSelect>
+                        <ValidationMessage For="@(()=> trabajadores.AreasId )" />
+                    }
+
+                </div>
+
+
+                <div class="form-group">
+                    <InputDate class="form-control" @bind-Value="@trabajadores.FechaIngreso"></InputDate>
+                    <ValidationMessage For="@(()=> trabajadores.FechaIngreso )" />
+                </div>
+
+                <div class="form-group">
+                    <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.Sexo" placeholder="Area">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(()=> trabajadores.Sexo )" />
+                </div>
+
+                <div class="form-group">
+
+                    @if (ListAreasRespuesta.Exito > 0)
+                    {
+                        <InputSelect id="area" class="form-control" @bind-Value="@trabajadores.EmpresasId" placeholder="Area">
+                            @foreach (var item in (List<Empresas>)ListEmpresasRespuesta.Data)
+                                    {
+                                <option value="@item.Id">@item.Descripcion</option>
+                                    }
+                        </InputSelect>
+                        <ValidationMessage For="@(()=> trabajadores.EmpresasId )" />
+                    }
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Guardar</button>
+            </div>
         </div>
-    </EditForm>
+
+    </div>
+</EditForm>
 
 
 }

@@ -8,6 +8,7 @@ namespace BlazorFront.Models
     public class Empresas
     {
         public int Id { get; set; }
+
         public string Descripcion { get; set; }
     }
 }
